@@ -1,5 +1,5 @@
 import { assertEquals, assertThrows } from "@std/assert";
-import { loadConfig } from "../config.ts";
+import { loadConfig } from "../src/config.ts";
 
 const GUILD_ID = "123456789012345678";
 const ROLE_ID = "323456789012345678";

@@ -1,7 +1,9 @@
 # DiscordBotWithDeno
 
-A project for building a Deno based REST API used for interacting with a
-role switching discord bot. The project requires a Discord bot token, a guild id and a list of role ids which it can assign on the server it is targeted for with the guild id and invitation.
+A project for building a Deno based REST API used for interacting with a role
+switching discord bot. The project requires a Discord bot token, a guild id and
+a list of role ids which it can assign on the server it is targeted for with the
+guild id and invitation.
 
 ## Stack
 
@@ -14,7 +16,8 @@ role switching discord bot. The project requires a Discord bot token, a guild id
 
 ## Setup
 
-To use this project you need a discord server and a discord bot created in the discord developer portal. The setup process in details is:
+To use this project you need a discord server and a discord bot created in the
+discord developer portal. The setup process in details is:
 
 1. Create a Discord application + bot at
    https://discord.com/developers/applications.
@@ -49,3 +52,25 @@ have been explicitly allow-listed, so it can't be used to grant or revoke
 arbitrary (e.g. admin/moderator) roles even if something upstream is
 misconfigured. A failure calling Discord (bad token, missing permissions, role
 below the bot's role, etc.) responds `502` with the underlying error message.
+
+## Docker
+
+A `Dockerfile` is provided so the API can be run on any server without
+installing Deno.
+
+Configuration is passed in at runtime via environment variables
+
+```sh
+docker run -d \
+  -p 8000:8000 \
+  -e DISCORD_TOKEN=your-bot-token \
+  -e GUILD_ID=your-guild-id \
+  -e ASSIGNABLE_ROLE_IDS=role-id-1,role-id-2 \
+  ghcr.io/<owner>/<repo>:latest
+```
+
+To build locally instead:
+
+```sh
+docker build -t discord-bot .
+```

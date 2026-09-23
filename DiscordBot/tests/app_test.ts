@@ -1,6 +1,6 @@
 import { assertEquals } from "@std/assert";
-import { createApp } from "../app.ts";
-import type { RoleAssigner } from "../discordClient.ts";
+import { createApp } from "../src/app.ts";
+import type { DiscordClient } from "../src/discordClient.ts";
 
 /// MOCK DATA
 const GUILD_ID = "123456789012345678";
@@ -9,7 +9,7 @@ const ROLE_ID = "323456789012345678";
 const OTHER_ROLE_ID = "423456789012345678";
 const ALLOWED_ROLE_IDS = new Set([ROLE_ID]);
 
-function fakeRoles(overrides: Partial<RoleAssigner> = {}): RoleAssigner {
+function fakeRoles(overrides: Partial<DiscordClient> = {}): DiscordClient {
   return {
     assignRole: () => Promise.resolve(),
     removeRole: () => Promise.resolve(),
@@ -18,7 +18,7 @@ function fakeRoles(overrides: Partial<RoleAssigner> = {}): RoleAssigner {
 }
 
 async function withServer(
-  roles: RoleAssigner,
+  roles: DiscordClient,
   run: (baseUrl: string) => Promise<void>,
   assignableRoleIds: ReadonlySet<string> = ALLOWED_ROLE_IDS,
 ) {
