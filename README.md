@@ -24,9 +24,21 @@ discord developer portal. The setup process in details is:
 2. Invite the bot to your server with the `Manage Roles` permission, and make
    sure the bot's own role sits **above** any role you want it to assign
    (Discord enforces role hierarchy).
-3. Copy `.env.example` to `.env` and fill in `DISCORD_TOKEN` and
-   `ASSIGNABLE_ROLE_IDS` (comma-separated role snowflakes this API is allowed to
-   touch — required, fails closed if unset).
+3. Create a `.env` file in the project root with the following layout, and fill
+   in the values:
+
+   ```sh
+   DISCORD_TOKEN=
+   GUILD_ID=
+   ASSIGNABLE_ROLE_IDS=
+   PORT=
+   ```
+
+   - `DISCORD_TOKEN` — the bot token from the developer portal.
+   - `GUILD_ID` — the snowflake of the server the bot is invited to.
+   - `ASSIGNABLE_ROLE_IDS` — comma-separated role snowflakes this API is allowed
+     to touch — required, fails closed if unset.
+   - `PORT` — optional, defaults to `8000`.
 
 ## Commands
 
@@ -66,7 +78,7 @@ docker run -d \
   -e DISCORD_TOKEN=your-bot-token \
   -e GUILD_ID=your-guild-id \
   -e ASSIGNABLE_ROLE_IDS=role-id-1,role-id-2 \
-  ghcr.io/<owner>/<repo>:latest
+  ghcr.io/TheKaski/DiscordrolesBot:latest
 ```
 
 To build locally instead:
